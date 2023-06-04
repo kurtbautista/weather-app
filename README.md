@@ -1,4 +1,4 @@
-This is a [Vite](https://vitejs.dev/) project bootstrapped.
+This is a Weather Forecast App that is created in [Vite](https://vitejs.dev/) project bootstrapped.
 
 ## Getting Started
 
