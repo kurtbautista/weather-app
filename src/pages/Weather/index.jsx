@@ -3,13 +3,15 @@ import { format } from "date-fns";
 import { Button } from "@mui/base";
 import { Alert, Grid } from "@mui/material";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { getWeatherByCity } from "../../api/weatherApi";
 import { Preloader, SimpleTable } from "../../components";
 
-const Weather = (props) => {
+const Weather = () => {
   const navigate = useNavigate();
-  let [searchParams, setSearchParams] = useSearchParams();
+  const isMobile = useMediaQuery("(max-width:600px)");
+  let [searchParams] = useSearchParams();
   const city = searchParams.get("city");
 
   const [weather, setWeather] = useState({});
@@ -49,32 +51,39 @@ const Weather = (props) => {
     },
   ];
 
+  const transformHeader = (data, isMobile) =>
+    isMobile ? data.splice(0, 2) : data;
+
   const header = useMemo(
-    () => [
-      { name: "date", label: "Date" },
-      { name: "temp", label: "Temp (F)" },
-      {
-        name: "description",
-        label: "Description",
-        style: { display: { xs: "none" } },
-      },
-      {
-        name: "main",
-        label: "Main",
-        dataProps: { sx: { display: { xs: "none" } } },
-      },
-      {
-        name: "pressure",
-        label: "Pressure",
-        dataProps: { sx: { display: { xs: "none" } } },
-      },
-      {
-        name: "humidity",
-        label: "Humidity",
-        dataProps: { sx: { display: { xs: "none" } } },
-      },
-    ],
-    []
+    () =>
+      transformHeader(
+        [
+          { name: "date", label: "Date" },
+          { name: "temp", label: "Temp (F)" },
+          {
+            name: "description",
+            label: "Description",
+            style: { display: { xs: "none" } },
+          },
+          {
+            name: "main",
+            label: "Main",
+            dataProps: { sx: { display: { xs: "none" } } },
+          },
+          {
+            name: "pressure",
+            label: "Pressure",
+            dataProps: { sx: { display: { xs: "none" } } },
+          },
+          {
+            name: "humidity",
+            label: "Humidity",
+            dataProps: { sx: { display: { xs: "none" } } },
+          },
+        ],
+        isMobile
+      ),
+    [isMobile]
   );
 
   const data = useMemo(() => transformWeatherData(weather), [weather]);
@@ -82,7 +91,7 @@ const Weather = (props) => {
   const handleBack = () => navigate("/");
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} justifyContent="center">
       <Preloader isLoading={isLoading} />
       <Grid item md={12}>
         {error ? (
