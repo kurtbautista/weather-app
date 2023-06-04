@@ -3,8 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Typography } from "@mui/material";
 
 const Profile = (props) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  console.log("@@user", user);
+  const { user } = useAuth0();
   return (
     <>
       <Typography variant="h4">{user.name}</Typography>

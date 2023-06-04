@@ -46,8 +46,6 @@ const SimpleTable = ({ header, data }) => {
                   scope="row"
                   {...item.dataProps}
                   sx={{ display: { sx: "none" } }}
-                  // {...row[item.name]?.dataProps}
-                  // sx={row[item.name]?.dataProps?.sx}
                 >
                   {row[item.name]}
                 </TableCell>

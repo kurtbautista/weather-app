@@ -6,7 +6,6 @@ import { Can, WeatherSearch } from "../../components";
 
 const Home = () => {
   const { loginWithRedirect } = useAuth0();
-
   return (
     <Can
       no={() => (
