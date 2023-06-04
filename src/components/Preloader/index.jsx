@@ -26,7 +26,6 @@ const Preloader = ({ isLoading }) => {
         left: 0,
         background: "#ffffffd4",
         zIndex: 99,
-        display: "flex",
         justifyContent: "center",
         alignItems: "center",
       }}
